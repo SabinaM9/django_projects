@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WELCOME PAGE</title>
+    <h1>Здесь можно увидеть Ваши заказы</h1>
+  <hi>Заказы:</hi>
+</head>
+<body>
+    {% if order_list %}
+        <table border="5">
+            <tr>
+                <th>Id заказа</th>
+                <th>Дата</th>
+                <th>Имя заказчика</th>
+                <th>Номер заказчика</th>
+            </tr>
+            {% for obj in order_list %}
+                <tr>
+                    <th>{{ obj.id }}</th>
+                    <th>{{ obj.order_dt }}</th>
+                    <th>{{ obj.order_name }}</th>
+                    <th>{{ obj.order_phone }}</th>
+            </tr>
+             {% endfor %}
+        </table>
+    {% else %}
+    ЗАКАЗОВ НЕТ
+    {% endif %}
+
+    <br>
+    <br>
+
+    <form action="{% url 'thanks_page' %}" method="POST">
+        {% csrf_token %}
+        <label>Имя</label>
+        <input name="name">
+        <label>Номер телефона</label>
+        <input name="phone">
+        <button type="submit">ОТПРАВИТЬ</button>
+    </form>
+
+</body>
+</html>
