@@ -3,13 +3,18 @@
 from django.shortcuts import render
 
 from .models import Order
+from .forms import OrderForm
 
 
 def first_page(request):
     order_list = Order.objects.all()
+    form = OrderForm()
     return render(request,
                   './index.html',
-                  {'order_list': order_list}
+                  {
+                      'order_list': order_list,
+                      'form': form
+                  }
                   )
 
 
